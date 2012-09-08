@@ -1,0 +1,21 @@
+body {
+	margin: 0; padding: 0; font-size: 100%;
+}
+
+img { border: 0; }
+
+.note { 
+	border: 1px dashed gray; 
+	padding: 20px;
+	width: 200px;
+	font-size: 14px;
+}
+
+.note .header, .note .contents {
+		outline: none;
+}
+
+.note .header {
+	font-weight: bold;
+	font-size: 16px;
+}
