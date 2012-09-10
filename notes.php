@@ -8,9 +8,9 @@
 		$row['note_contents'] = str_replace("\n", "<br/>", $row['note_contents']);
 		$row['note_contents'] = str_replace("\t", "<p/>", $row['note_contents']);	
 		echo "
-			<div class=\"note\">
-				<div class=\"header\" contentEditable=\"true\">".$row['note_name']."</div>
-				<div class=\"contents\" contentEditable=\"true\">".$row['note_contents']."</div>
+			<div id=\"draggable\" class=\"ui-widget-content note\">
+				<div class=\"header\">".$row['note_name']."</div>
+				<div class=\"contents\">".$row['note_contents']."</div>
 				<div class=\"button\"><input type=\"button\" value=\"Save\" class=\"savebutton\"/></div>
 			</div>
 		";
