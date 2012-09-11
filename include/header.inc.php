@@ -12,7 +12,12 @@
 <body>
 <script type="text/javascript">
 $( function() {
-	$('#draggable').draggable();
-	$('.contents').editable('/savenotecontents.php', {type:"textarea"});
+	$('.draggable').draggable();
+	$('.contents').editable('/savenotecontents.php', {
+		type: "textarea",
+		id: "someid",
+		name: "user_contents",
+		submit: "OK",
+	});
 });
 </script>
