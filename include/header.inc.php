@@ -10,14 +10,3 @@
 <script src="/js/jquery.jeditable.mini.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-<script type="text/javascript">
-$( function() {
-	$('.draggable').draggable();
-	$('.contents').editable('/savenotecontents.php', {
-		type: "textarea",
-		id: "someid",
-		name: "user_contents",
-		submit: "OK",
-	});
-});
-</script>
