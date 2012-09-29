@@ -9,6 +9,7 @@
 		echo "Note save error";
 	}
 	*/
+	echo $sql;
 	print_r($_POST);
 	mysql_close();
 ?>
