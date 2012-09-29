@@ -8,7 +8,7 @@
 	tinyMCE.init({
 		mode : "textareas",
 		theme_advanced_path : false,
-		theme_advanced_statusbar_location : 0,
+		theme_advanced_statusbar_location : "none",
 		width : '100%',
 		height: '100%',
 		border: '0'
