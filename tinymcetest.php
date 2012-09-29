@@ -15,12 +15,26 @@
 		theme_advanced_buttons1 : "",
 		theme_advanced_buttons2 : "",
 		theme_advanced_buttons3 : "",
+		setup : function(ed) {
+	      ed.onKeyUp.add(function(ed, e) {
+
+	      });
+	   }
 	});
 	$( function() {
 		$( '.draggable' ).draggable().resizable();
 		$( '#saveButton' ).click( function() {
-			var savingNoteID = $( this ).prev().attr('id');
-			$.post("/savenotecontents.php", {noteID: savingNoteID},
+			var savingNote = $( this ).parents().children('.note');
+			var savingNoteID = savingNote.attr('id');
+			var savingNoteCoords = savingNote.parents().offset();
+			var savingNoteCoords_x = savingNoteCoords.left;
+			var savingNoteCoords_y = savingNoteCoords.top;
+			var savingNoteContent = tinyMCE.get('somesortof').getContent();
+			$.post("/savenotecontents.php", {
+					noteID: savingNoteID,
+					noteContent: savingNoteContent,
+					coords: savingNoteCoords_x + " " + savingNoteCoords_y
+				},
 				function(data) {
 					alert(data);
 				}
@@ -30,10 +44,11 @@
 </script>
 <style>
 	tr.mceFirst { display: none; }
+	.draggable { top: 200px; left: 200px; }
 </style>
 <div class="draggable ui-widget-content note">
-	<textarea id="somesortof"></textarea>
-	<input type="button" id="saveButton" value="Save" />
+		<textarea id="somesortof" class="note"></textarea>
+		<input type="button" id="saveButton" value="Save" style="padding-bottom: 15px;" />
 </div>
 
 <? include_once($_PATH['include']."/footer.inc.php"); ?>
