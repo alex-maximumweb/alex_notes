@@ -50,13 +50,20 @@
 <style>
 	tr.mceFirst { display: none; }
 </style>
+<div class="topbar">
+	<ul class="navigation">
+		<li><a href="/">Home</a></li>
+	</ul>
+	<div class="status">
+	</div>
+</div>
 <?	
 	$sql = mysql_query( "SELECT * FROM `notes_notes` WHERE `note_type` = '".$_GET['category']."'" );
 	while( $row = mysql_fetch_array( $sql, MYSQL_ASSOC ) ) {
 		$row['note_contents'] = str_replace("\n", "<br/>", $row['note_contents']);
 		$row['note_contents'] = str_replace("\t", "<p/>", $row['note_contents']);	
 		echo "
-			<div class=\"draggable ui-widget-content note\" style=\"left: ".$row['note_coord_x']."px; top: ".$row['note_coord_y']."px\">
+			<div class=\"draggable ui-widget-content note\" style=\"position: absolute; left: ".$row['note_coord_x']."px; top: ".$row['note_coord_y']."px\">
 				<textarea class=\"note\" id=\"note".$row['note_id']."\">".$row['note_contents']."</textarea>
 			</div>
 		";
