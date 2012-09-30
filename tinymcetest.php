@@ -1,4 +1,4 @@
-<? 
+﻿<? 
 	$_PAGEVARS['title']="tinymce test";
 	include_once($_SERVER['DOCUMENT_ROOT']."/config.inc.php");
 	include_once($_PATH['include']."/header.inc.php");
@@ -37,7 +37,7 @@
 				coord_y: savingNoteCoords_y
 			},
 			function(data) {
-				alert(data);
+				$('#postresult').html(data);
 			}
 		);
 	}
@@ -51,11 +51,10 @@
 </script>
 <style>
 	tr.mceFirst { display: none; }
-	.draggable { top: 200px; left: 200px; }
 </style>
-<div class="draggable ui-widget-content note">
-		<textarea id="somesortof" class="note"></textarea>
-		<input type="button" id="saveButton" value="Save" style="padding-bottom: 15px;" />
+<div class="draggable ui-widget-content note" style="top: 500px; left: 500px;">
+	<textarea id="somesortof" class="note"></textarea>
 </div>
+<div id="postresult"></div>
 
 <? include_once($_PATH['include']."/footer.inc.php"); ?>
