@@ -9,3 +9,12 @@
 <script src="/js/jquery-ui-1.8.23.custom/js/jquery-ui-1.8.23.custom.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+<div class="topbar">
+	<ul class="navigation">
+		<li><a href="/">Home</a></li>
+		<li><a href="/rules/">Rules</a></li>
+	</ul>
+	<div id="postresult">
+	</div>
+	<div class="clear"></div>
+</div>

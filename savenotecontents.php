@@ -15,6 +15,8 @@
 	$sql = mysql_query( $sql );
 	if( !$sql ) {
 		echo "Note save error";
+	} else {
+		print_r($_POST);
 	}
 	mysql_close();
 ?>

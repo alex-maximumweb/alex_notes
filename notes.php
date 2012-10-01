@@ -27,6 +27,7 @@
 	function saveNoteContents( object ) {
 		var savingNote = object.parents().children('.note');
 		var savingNoteID = savingNote.attr('id');
+		alert(savingNoteID);
 		var savingNoteCoords = savingNote.parents().offset();
 		var savingNoteCoords_x = savingNoteCoords.left;
 		var savingNoteCoords_y = savingNoteCoords.top;
@@ -47,16 +48,6 @@
 		$( '.draggable' ).draggable( { iframeFix: true }).resizable();
 	});
 </script>
-<style>
-	tr.mceFirst { display: none; }
-</style>
-<div class="topbar">
-	<ul class="navigation">
-		<li><a href="/">Home</a></li>
-	</ul>
-	<div class="status">
-	</div>
-</div>
 <?	
 	$sql = mysql_query( "SELECT * FROM `notes_notes` WHERE `note_type` = '".$_GET['category']."'" );
 	while( $row = mysql_fetch_array( $sql, MYSQL_ASSOC ) ) {
