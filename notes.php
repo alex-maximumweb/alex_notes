@@ -46,8 +46,7 @@
 		$( '.draggable' ).draggable( { 
 			iframeFix: true, 
 			zIndex: 2700,
-			start: function( event, ui) {
-				$( this ).children( '.close' ).fadeOut('fast');
+			start: function(event, ui) {
 			},
 			stop: function(event, ui) { 
 				saveNoteContents( $(this).children('.note') )
