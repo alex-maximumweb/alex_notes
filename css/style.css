@@ -28,7 +28,7 @@ a { font-family: Arial; }
 
 tr.mceFirst, .ui-icon-gripsmall-diagonal-se { display: none ! important; }
 
-.topbar { background: #000; color: white; font-size: 11px; }
+.topbar { background: url('/i/global/header_transparent.png') top left; color: white; font-size: 11px; }
 
 .navigation { list-style-type: none; padding: 0 0 0 40px;}
 .navigation li { float: left; margin-right: 40px; padding: 10px 0;}
