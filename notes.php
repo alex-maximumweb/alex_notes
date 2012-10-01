@@ -57,6 +57,10 @@
 		}, function() {
 			$( this ).children( '.close' ).fadeOut('fast');		
 		});
+		
+		$( '#createnote' ).click( function() {
+			$('<div>asdasdasdasd</div>').appendTo('body');
+		});
 	});
 </script>
 <?	
