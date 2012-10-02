@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Сен 30 2012 г., 16:52
+-- Время создания: Окт 03 2012 г., 01:43
 -- Версия сервера: 5.5.28
 -- Версия PHP: 5.2.17
 
@@ -36,17 +36,18 @@ CREATE TABLE IF NOT EXISTS `notes_notes` (
   `note_coord_x` int(11) NOT NULL,
   `note_coord_y` int(11) NOT NULL,
   `note_coord_z` int(11) NOT NULL,
+  `note_width` int(11) NOT NULL,
+  `note_height` int(11) NOT NULL,
   `note_order` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`note_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 --
 -- Дамп данных таблицы `notes_notes`
 --
 
-INSERT INTO `notes_notes` (`note_id`, `note_name`, `note_type`, `note_update_datetime`, `note_creation_datetime`, `note_contents`, `note_coord_x`, `note_coord_y`, `note_coord_z`, `note_order`) VALUES
-(1, 'note1', 1, '2012-09-30 11:27:57', '2012-09-11 01:22:32', '<p>в этой заметке пусто222222ф...ффф</p>', 343, 368, 0, 0),
-(2, 'note1', 1, '2012-09-30 11:25:52', '2012-09-11 01:22:32', '<p>в этой заметке пусто222222...ффф</p>', 360, 101, 0, 0);
+INSERT INTO `notes_notes` (`note_id`, `note_name`, `note_type`, `note_update_datetime`, `note_creation_datetime`, `note_contents`, `note_coord_x`, `note_coord_y`, `note_coord_z`, `note_width`, `note_height`, `note_order`) VALUES
+(41, 'note1', 1, '2012-10-02 21:42:07', '2012-10-02 21:39:51', '', 223, 125, 0, 456, 294, 0);
 
 -- --------------------------------------------------------
 
