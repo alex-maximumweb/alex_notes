@@ -1,6 +1,9 @@
 <?
 $_PATH['include'] = $_SERVER['DOCUMENT_ROOT']."/include";
 
+$_STRING['query_error'] = "query error";
+$_STRING['confirm_note_delete'] = "Вы действительно хотите удалить заметку?";
+
 function dbconnect() {
 	$mysql_connect = mysql_connect( 
 		"localhost", 

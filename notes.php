@@ -3,6 +3,8 @@
 	include_once( $_SERVER['DOCUMENT_ROOT'] ."/config.inc.php" );
 	include_once( $_PATH['include'] ."/header.inc.php" );
 	dbconnect();
+	
+	//External data check should be fpilled here
 ?>	
 <script type="text/javascript" src="/tinymce/tiny_mce.js"></script>
 <script type="text/javascript">
@@ -13,7 +15,7 @@
 		var savingNoteCoords_x = savingNoteCoords.left;
 		var savingNoteCoords_y = savingNoteCoords.top;
 		var savingNoteContent = tinyMCE.get( savingNoteID ).getContent();
-		$.post("/savenotecontents.php", {
+		$.post("/editnote.php?action=updateexisting", {
 				note_ID: savingNoteID,
 				note_Content: savingNoteContent,
 				coord_x: savingNoteCoords_x,
@@ -26,13 +28,31 @@
 	}
 	
 	function createNewNote( object ) {
-		var randomID = Math.floor((Math.random()*100000000000)+1000000000000);
-		var randomIDPlus = randomID++;
-		var newNoteContents = "<div class='draggable ui-widget-content note' style='position: absolute; left: 50px; top: 50px' id='"+randomID+"'><textarea class='note' id='"+randomIDPlus+"'></textarea><div class='close'><i></i></div></div>";
-		$( newNoteContents ).appendTo( object );
-		initTinyMCE();
-		setDraggable()
-		//$( '#'+randomID ).setDraggable();
+		$.post("/editnote.php?action=createnew", {
+				noteType: <?=$_GET['category'];?>
+			}, 
+			function(data) {
+				var newNoteID = data;
+				if( newNoteID != "<?=$_STRING['query_error'];?>" ) {
+					var newNoteContents = "<div class='draggable ui-widget-content note' style='position: absolute; left: 50px; top: 50px'><textarea class='note' id='"+newNoteID+"'></textarea><div class='close'><i></i></div></div>";
+					$( newNoteContents ).appendTo( object );
+					initTinyMCE();
+					setDraggable();
+				}
+			}
+		);
+	}
+	
+	function deleteNote( object ) {
+		if( confirm( '<?=$_STRING['confirm_note_delete'];?>' ) ) {
+			$.post("/editnote.php?action=deletenote", {
+				note_id: $( object ).children('.note').attr('id')
+			}, function( data ) {
+				if( data != "<?=$_STRING['query_error'];?>" ) {
+					$( object ).remove();
+				}
+			})
+		}
 	}
 	
 	function initTinyMCE() {
@@ -67,14 +87,24 @@
 	}
 	
 	$( function() {
-		$( '.draggable' ).hover( function() {
-			$( this ).children( '.close' ).fadeIn('fast');
-		}, function() {
-			$( this ).children( '.close' ).fadeOut('fast');		
+		$( '.draggable' ).live({
+			mouseenter: function() {
+				$( this ).children( '.close' ).fadeIn('fast');
+			},
+			mouseleave: function() {
+				$( this ).children( '.close' ).fadeOut('fast');		
+			}
 		});
-		
+
 		$( '#createnote' ).click( function() {
 			createNewNote('body');
+			return false;
+		});
+
+		$( '.close' ).live({ 
+			click: function() { 
+				deleteNote( $( this ).parents('.draggable') );
+			}
 		});
 		
 		initTinyMCE();
