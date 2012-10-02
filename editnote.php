@@ -5,7 +5,7 @@
 	switch( $_GET['action'] ) {
 		case "createnew":
 			if( isset( $_POST['noteType'] ) ) {
-				$sql = "INSERT INTO `notes_notes` VALUES (NULL, 'note', '".$_POST['noteType']."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '', '50', '50', '0', '0')";
+				$sql = "INSERT INTO `notes_notes` VALUES (NULL, 'note', '".$_POST['noteType']."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '', '50', '50', '0', '200', '150', '0')";
 				$sql = mysql_query( $sql );
 				if($sql) {
 					$selectlastnote_sql = "SELECT `note_id` FROM `notes_notes` ORDER BY `note_id` DESC LIMIT 1";
@@ -32,6 +32,8 @@
 				`note_coord_x` = '".$_POST['coord_x']."',
 				`note_coord_y` = '".$_POST['coord_y']."',
 				`note_coord_z` = '0', 
+				`note_width` = '".$_POST['width']."',
+				`note_height` = '".$_POST['height']."', 
 				`note_order` = '0' 
 				WHERE `note_id` = '".$_POST['note_ID']."'
 			";

@@ -10,16 +10,21 @@
 <script type="text/javascript">
 	function saveNoteContents( object ) {
 		var savingNote = object.parents().children('.note');
+		var savingNoteParent = object.parents();
 		var savingNoteID = savingNote.attr('id');
-		var savingNoteCoords = savingNote.parents().offset();
+		var savingNoteCoords = savingNoteParent.offset();
 		var savingNoteCoords_x = savingNoteCoords.left;
 		var savingNoteCoords_y = savingNoteCoords.top;
+		var savingNoteWidth = savingNoteParent.width();
+		var savingNoteHeight = savingNoteParent.height();
 		var savingNoteContent = tinyMCE.get( savingNoteID ).getContent();
 		$.post("/editnote.php?action=updateexisting", {
 				note_ID: savingNoteID,
 				note_Content: savingNoteContent,
 				coord_x: savingNoteCoords_x,
-				coord_y: savingNoteCoords_y
+				coord_y: savingNoteCoords_y,
+				width: savingNoteWidth,
+				height: savingNoteHeight
 			},
 			function(data) {
 				//$('#postresult').html(data);
@@ -81,9 +86,13 @@
 			start: function(event, ui) {
 			},
 			stop: function(event, ui) { 
-				saveNoteContents( $(this).children('.note') )
+				saveNoteContents( $( this ).children( '.note' ) );
 			} 
-		}).resizable();	
+		}).resizable( {
+			stop: function(event, ui) {
+				saveNoteContents( $( this ).children( '.note' ) );
+			}
+		});	
 	}
 	
 	$( function() {
@@ -96,9 +105,11 @@
 			}
 		});
 
-		$( '#createnote' ).click( function() {
-			createNewNote('body');
-			return false;
+		$( '#createnote' ).live({
+			click: function() {
+				createNewNote('body');
+				return false;
+			}
 		});
 
 		$( '.close' ).live({ 
@@ -107,15 +118,20 @@
 			}
 		});
 		
+		//initial happenings
 		initTinyMCE();
 		setDraggable();
+		$( '.likebutton' ).each( function() {
+			$( this ).button();
+		});
 	});
 </script>
+<div><input type="button" class="likebutton" id="createnote" value="Create note" /></div>
 <?	
 	$sql = mysql_query( "SELECT * FROM `notes_notes` WHERE `note_type` = '".$_GET['category']."'" );
 	while( $row = mysql_fetch_array( $sql, MYSQL_ASSOC ) ) {
 		echo "
-			<div class=\"draggable ui-widget-content note\" style=\"position: absolute; left: ".$row['note_coord_x']."px; top: ".$row['note_coord_y']."px\">
+			<div class=\"draggable ui-widget-content note\" style=\"position: absolute; left: ".$row['note_coord_x']."px; top: ".$row['note_coord_y']."px; width: ".$row['note_width']."px; height: ".$row['note_height']."px;\">
 				<textarea class=\"note\" id=\"".$row['note_id']."\">".$row['note_contents']."</textarea>
 				<div class=\"close\"><i></i></div>
 			</div>

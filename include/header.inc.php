@@ -12,7 +12,6 @@
 <div class="topbar">
 	<ul class="navigation">
 		<li><a href="/">Home</a></li>
-		<li><a href="#" id="createnote">Create Note</a></li>
 	</ul>
 	<div id="postresult">
 	</div>
