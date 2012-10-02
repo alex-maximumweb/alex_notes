@@ -25,24 +25,36 @@
 		);
 	}
 	
-	tinyMCE.init({
-		mode : "textareas",
-		theme_advanced_path : false,
-		theme_advanced_statusbar_location : "none",
-		width : '100%',
-		height: '100%',
-		theme : "advanced",
-		theme_advanced_buttons1 : "",
-		theme_advanced_buttons2 : "",
-		theme_advanced_buttons3 : "",
-		setup : function(ed) {
-			ed.onKeyUp.add(function(ed, e) {
-				saveNoteContents( $( '#'+$( this ).attr('id') ) );
-			});
-		}
-	});
+	function createNewNote( object ) {
+		var randomID = Math.floor((Math.random()*100000000000)+1000000000000);
+		var randomIDPlus = randomID++;
+		var newNoteContents = "<div class='draggable ui-widget-content note' style='position: absolute; left: 50px; top: 50px' id='"+randomID+"'><textarea class='note' id='"+randomIDPlus+"'></textarea><div class='close'><i></i></div></div>";
+		$( newNoteContents ).appendTo( object );
+		initTinyMCE();
+		setDraggable()
+		//$( '#'+randomID ).setDraggable();
+	}
 	
-	$( function() {
+	function initTinyMCE() {
+		tinyMCE.init({
+			mode : "textareas",
+			theme_advanced_path : false,
+			theme_advanced_statusbar_location : "none",
+			width : '100%',
+			height: '100%',
+			theme : "advanced",
+			theme_advanced_buttons1 : "",
+			theme_advanced_buttons2 : "",
+			theme_advanced_buttons3 : "",
+			setup : function(ed) {
+				ed.onKeyUp.add(function(ed, e) {
+					saveNoteContents( $( '#'+$( this ).attr('id') ) );
+				});
+			}
+		});	
+	}
+
+	function setDraggable() {
 		$( '.draggable' ).draggable( { 
 			iframeFix: true, 
 			zIndex: 2700,
@@ -51,7 +63,10 @@
 			stop: function(event, ui) { 
 				saveNoteContents( $(this).children('.note') )
 			} 
-		}).resizable();
+		}).resizable();	
+	}
+	
+	$( function() {
 		$( '.draggable' ).hover( function() {
 			$( this ).children( '.close' ).fadeIn('fast');
 		}, function() {
@@ -59,8 +74,11 @@
 		});
 		
 		$( '#createnote' ).click( function() {
-			$('<div>asdasdasdasd</div>').appendTo('body');
+			createNewNote('body');
 		});
+		
+		initTinyMCE();
+		setDraggable();
 	});
 </script>
 <?	
