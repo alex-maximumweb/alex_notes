@@ -26,7 +26,6 @@
 		case "updateexisting":
 			$sql = "UPDATE `notes_notes` SET 
 				`note_name` = 'note1',
-				`note_type` = '1',
 				`note_update_datetime` = CURRENT_TIMESTAMP,
 				`note_contents` = '".$_POST['note_Content']."',
 				`note_coord_x` = '".$_POST['coord_x']."',
