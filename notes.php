@@ -2,6 +2,7 @@
 	$_PAGEVARS['title'] = "Мои заметки";
 	include_once( $_SERVER['DOCUMENT_ROOT'] ."/config.inc.php" );
 	include_once( $_PATH['include'] ."/header.inc.php" );
+	include_once( $_PATH['include'] ."/navbar.inc.php" );
 	dbconnect();
 	
 	//External data check should be fpilled here

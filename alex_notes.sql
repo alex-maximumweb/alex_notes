@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Окт 03 2012 г., 01:43
+-- Время создания: Окт 05 2012 г., 15:53
 -- Версия сервера: 5.5.28
 -- Версия PHP: 5.2.17
 
@@ -40,14 +40,15 @@ CREATE TABLE IF NOT EXISTS `notes_notes` (
   `note_height` int(11) NOT NULL,
   `note_order` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`note_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
 -- Дамп данных таблицы `notes_notes`
 --
 
 INSERT INTO `notes_notes` (`note_id`, `note_name`, `note_type`, `note_update_datetime`, `note_creation_datetime`, `note_contents`, `note_coord_x`, `note_coord_y`, `note_coord_z`, `note_width`, `note_height`, `note_order`) VALUES
-(41, 'note1', 1, '2012-10-02 21:42:07', '2012-10-02 21:39:51', '', 223, 125, 0, 456, 294, 0);
+(52, 'note1', 2, '2012-10-05 10:54:51', '2012-10-05 10:54:49', '', 533, 442, 0, 200, 150, 0),
+(51, 'note1', 1, '2012-10-05 10:54:48', '2012-10-05 10:54:46', '', 331, 117, 0, 200, 150, 0);
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `notes_users` (
 --
 
 INSERT INTO `notes_users` (`user_id`, `user_name`, `user_password`, `user_regdate`) VALUES
-(1, 'aexb', '9dc1f916650950e01f75951f6de9bab5', '2012-09-02 12:12:35');
+(1, 'aexb', '9dc1f916650950e01f75951f6de9bab5', '2012-10-05 11:53:14');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
