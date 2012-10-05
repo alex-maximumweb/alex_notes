@@ -8,7 +8,7 @@
 				$sql = "INSERT INTO `notes_notes` VALUES (NULL, 'note', '".$_POST['noteType']."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '', '50', '50', '0', '200', '150', '0')";
 				$sql = mysql_query( $sql );
 				if($sql) {
-					$selectlastnote_sql = "SELECT `note_id` FROM `notes_notes` ORDER BY `note_id` DESC LIMIT 1";
+					$selectlastnote_sql = "SELECT `note_id` FROM `notes_notes` WHERE `note_type` = '".$_POST['noteType']."' ORDER BY `note_id` DESC LIMIT 1";
 					$selectlastnote_sql = mysql_query( $selectlastnote_sql );
 					if($selectlastnote_sql) {
 						while( $row = mysql_fetch_array( $selectlastnote_sql, MYSQL_ASSOC ) ) {

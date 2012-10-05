@@ -2,10 +2,19 @@
 	$_PAGEVARS['title'] = "Мои заметки";
 	include_once( $_SERVER['DOCUMENT_ROOT'] ."/config.inc.php" );
 	include_once( $_PATH['include'] ."/header.inc.php" );
-	include_once( $_PATH['include'] ."/navbar.inc.php" );
 	dbconnect();
+	include_once( $_PATH['include'] ."/navbar.inc.php" );
 	
-	//External data check should be fpilled here
+	//Проверка, заведена ли у этого юзера категория, про которую он хочет посмотреть заметки.
+	//Если не заведена - нахуй на индексную страницу к своим категориям
+	$checkcategory_sql = "SELECT `notetype_id` FROM `notes_notetypes` WHERE `notetype_userid` = '".$_COOKIE['userid']."' AND `notetype_id` = '".$_GET['category']."' LIMIT 1";
+	$checkcategory_sql = mysql_query($checkcategory_sql);
+	if( mysql_num_rows ($checkcategory_sql) < 1 ) {
+		header("Location: /" );
+		break;
+	}
+	
+	//А тут надо впилить проверку внешних данных
 ?>	
 <script type="text/javascript" src="/tinymce/tiny_mce.js"></script>
 <script type="text/javascript">
@@ -39,8 +48,9 @@
 			}, 
 			function(data) {
 				var newNoteID = data;
+				console.log(data);
 				if( newNoteID != "<?=$_STRING['query_error'];?>" ) {
-					var newNoteContents = "<div class='draggable ui-widget-content note' style='position: absolute; left: 50px; top: 50px'><textarea class='note' id='"+newNoteID+"'></textarea><div class='close'><i></i></div></div>";
+					var newNoteContents = "<div class='draggable ui-widget-content note' style='position: absolute; left:40px; top:120px'><textarea class='note' id='"+newNoteID+"'></textarea><div class='close'><i></i></div></div>";
 					$( newNoteContents ).appendTo( object );
 					initTinyMCE();
 					setDraggable();
@@ -127,7 +137,7 @@
 		});
 	});
 </script>
-<div><input type="button" class="likebutton" id="createnote" value="Create note" /></div>
+<div class="createnotebutton"><input type="button" class="likebutton" id="createnote" value="Новая заметка" /></div>
 <?	
 	$sql = mysql_query( "SELECT * FROM `notes_notes` WHERE `note_type` = '".$_GET['category']."'" );
 	while( $row = mysql_fetch_array( $sql, MYSQL_ASSOC ) ) {

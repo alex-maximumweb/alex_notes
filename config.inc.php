@@ -19,15 +19,20 @@ function checkLogin() {
 	$password = md5( $_POST['password'] );
 	$cookieusername = $_COOKIE['username'];
 	$cookiepassword = $_COOKIE['password'];
+	$cookieuserid = $_COOKIE['userid'];
 	
 	//если присутствуют логин и пароль, значит пытаемся логинить
 	//если их нет - значит проверяем куки и либо нахуй, либо позволяем работать
 
-	if( isset( $username ) && isset( $password ) ) {
+	if( !empty( $username ) && !empty( $password ) ) {
 		//значит пытаемся логинить и ставим куку
-		$sql = mysql_query("SELECT * FROM `notes_users` WHERE `user_name` = '".$username."' AND `user_password` = '".$password."' LIMIT 1");
+		$sql = mysql_query("SELECT `user_id`, `user_name`, `user_password` FROM `notes_users` WHERE `user_name` = '".$username."' AND `user_password` = '".$password."' LIMIT 1");
+		while( $row = mysql_fetch_array( $sql, MYSQL_ASSOC ) ) {
+			$cookieuserid = $row['user_id'];			
+		}
 		if( mysql_num_rows( $sql ) == 1 ) {
 			$cookieexpiretime = time()+60*60*24*30;
+			setcookie( "userid", $cookieuserid, $cookieexpiretime);
 			setcookie( "username", $username, $cookieexpiretime );
 			setcookie( "password", $password, $cookieexpiretime );
 			return true;
@@ -36,8 +41,8 @@ function checkLogin() {
 		}		
 	} else {
 		//проверяем есть ли ченить в куках. если есть - проверяем на валидность. если нет - нахуй.
-		if( isset( $cookieusername ) && isset( $cookiepassword ) ) {
-			$sql = "SELECT * FROM `notes_users` WHERE `user_name` = '".$cookieusername."' AND `user_password` = '".$cookiepassword."' LIMIT 1";
+		if( !empty( $cookieusername ) && !empty( $cookiepassword ) && !empty($cookieuserid) ) {
+			$sql = "SELECT `user_id` FROM `notes_users` WHERE `user_id` = '".$cookieuserid."' AND `user_name` = '".$cookieusername."' AND `user_password` = '".$cookiepassword."' LIMIT 1";
 			$sql = mysql_query( $sql );
 			if( mysql_num_rows( $sql ) == 1 ) {
 				return true;

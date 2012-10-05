@@ -5,7 +5,7 @@
 	dbconnect();
 
 	switch($_GET['action']) {
-		case "dologin":
+		case "login":
 			$checklogin = checkLogin();
 			if ($checklogin) {
 				header('Location: /');
@@ -14,12 +14,18 @@
 			}
 
 		break;
+		case "logout":
+			setcookie("username", "", time()-3600);
+			setcookie("password", "", time()-3600);
+			setcookie("userid", "", time()-3600);
+			header('Location: /login.php');
+		break;
 		default:
 			$checkLogin = checkLogin();
 			if( !$checkLogin ) {
 				echo "
 					<div class=\"loginform\" >
-						<form method=\"POST\" action=\"?action=dologin\">
+						<form method=\"POST\" action=\"?action=login\">
 							<div>
 								<input type=\"text\" name=\"username\" placeholder=\"Имя пользователя\" />
 							</div>
@@ -28,7 +34,7 @@
 							</div>
 							<div>
 								<input type=\"submit\" name=\"submit\" value=\"Войти\" />
-							</div>
+							</div>						
 						</form>
 					</div>
 				";

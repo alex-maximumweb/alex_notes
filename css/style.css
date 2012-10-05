@@ -1,5 +1,5 @@
 body {
-	margin: 0; padding: 0; font-size: 100%; background: url('/i/global/wood.jpg') top center;
+	margin: 0; padding: 0; font-size: 100%; background: url('/i/global/wood.jpg') top center; font-family: Arial;
 }
 
 * { padding: 0; margin: 0;}
@@ -33,10 +33,13 @@ a { font-family: Arial; }
 tr.mceFirst, .ui-icon-gripsmall-diagonal-se { display: none ! important; }
 
 .topbar { background: url('/i/global/header_transparent.png') top left; color: white; font-size: 11px; }
+.topbar a { color: #FFF; }
+.topbar a:hover { color:#CCC; }
 
-.navigation { list-style-type: none; padding: 0 0 0 40px;}
+.navigation { list-style-type: none; padding: 0 0 0 40px; font-size: 14px;}
 .navigation li { float: left; margin-right: 40px; padding: 10px 0;}
 .navigation li a { color: #FFF; font-size: 14px; }
+.navigation span { color: #CCC; }
 
 .draggable .close {
 	display: none; position: absolute; width: 28px; height: 28px; top: -14px; right: -14px; cursor: pointer; background: url( '/i/global/close.png') top left; z-index: 9999;
@@ -63,6 +66,30 @@ tr.mceFirst, .ui-icon-gripsmall-diagonal-se { display: none ! important; }
 	width: 290px;
 }
 
-.loginform input[type="submit"] {
+.loginform input[type="submit"], input[type="button"] {
 	padding: 5px 15px;
+}
+
+#logstatus {position: absolute; top: 10px; right: 40px; font-size: 14px;}
+
+.createnotebutton {
+	margin: 20px 40px;
+}
+
+.notetypes {
+	padding: 20px 40px;
+}
+
+.notetypes li {
+	padding-bottom: 10px;
+	list-style-type: none;
+}
+
+.notetypes a {
+	font-size: 26px;
+	color: #FFF;
+}
+
+.notetypes a:hover {
+	color: #CCC;
 }
