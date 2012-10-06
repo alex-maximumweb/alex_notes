@@ -6,8 +6,7 @@
 
 	switch($_GET['action']) {
 		case "login":
-			$checklogin = checkLogin();
-			if ($checklogin) {
+			if (checkLogin()) {
 				header('Location: /');
 			} else {
 				header('Location: /login.php');
@@ -21,8 +20,7 @@
 			header('Location: /login.php');
 		break;
 		default:
-			$checkLogin = checkLogin();
-			if( !$checkLogin ) {
+			if( !checkLogin() ) {
 				?>
 					<div class="loginform" >
 						<form method="POST" action="?action=login">

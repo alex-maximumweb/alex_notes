@@ -1,8 +1,8 @@
 <?
 	$_PAGEVARS['title'] = "Мои заметки";
 	include_once( $_SERVER['DOCUMENT_ROOT'] ."/config.inc.php" );
+	dbconnect();		
 	include_once( $_PATH['include'] ."/header.inc.php" );
-	dbconnect();
 	include_once( $_PATH['include'] ."/navbar.inc.php" );
 	
 	//Проверка, заведена ли у этого юзера категория, про которую он хочет посмотреть заметки.
@@ -29,7 +29,7 @@
 		var savingNoteHeight = savingNoteParent.height();
 		var savingNoteContent = tinyMCE.get( savingNoteID ).getContent();
 		$.post("/editnote.php?action=updateexisting", {
-				note_ID: savingNoteID,
+				noteID: savingNoteID,
 				note_Content: savingNoteContent,
 				coord_x: savingNoteCoords_x,
 				coord_y: savingNoteCoords_y,
@@ -62,7 +62,7 @@
 	function deleteNote( object ) {
 		if( confirm( '<?=$_STRING['confirm_note_delete'];?>' ) ) {
 			$.post("/editnote.php?action=deletenote", {
-				note_id: $( object ).children('.note').attr('id')
+				noteID: $( object ).children('.note').attr('id')
 			}, function( data ) {
 				if( data != "<?=$_STRING['query_error'];?>" ) {
 					$( object ).remove();

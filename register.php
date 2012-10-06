@@ -6,8 +6,8 @@
 
 	switch( $_GET['action'] ) {
 		case "register":
-			$username = @addslashes(strip_tags($_POST['username']));
-			$password = @addslashes(strip_tags(md5($_POST['password'])));
+			$username = securityInputCheck($_POST['username']);
+			$password = securityInputCheck(md5($_POST['password']));
 			
 			$sql = mysql_query("SELECT `user_id` FROM `notes_users` WHERE `user_name` = '".$username."'");
 			if( mysql_num_rows($sql) < 1 ) {

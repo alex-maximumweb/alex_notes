@@ -1,12 +1,9 @@
 <?
 	include_once( $_SERVER['DOCUMENT_ROOT'] ."/config.inc.php" );
-	include_once( $_PATH['include'] ."/header.inc.php" );	
 	dbconnect();
+	include_once( $_PATH['include'] ."/header.inc.php" );	
 	include_once( $_PATH['include'] ."/navbar.inc.php" );	
 	
-	if( !checklogin() ) {
-		header("Location: /login.php");
-	}
 	$sql = mysql_query( "SELECT `notetype_id`,`notetype_name` FROM `notes_notetypes` WHERE `notetype_userid` = '".$_COOKIE['userid']."'" );
 
 	echo "<ul class=\"notetypes\">";

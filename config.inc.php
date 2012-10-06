@@ -14,12 +14,19 @@ function dbconnect() {
 	mysql_query( "SET NAMES 'utf8'" );
 }
 
+function securityInputCheck($variable) {
+	$variable = strip_tags($variable);
+	$variable = htmlspecialchars($variable);
+	$variable = mysql_escape_string($variable);
+	return $variable;
+}
+
 function checkLogin() {
-	$username = $_POST['username'];
-	$password = md5( $_POST['password'] );
-	$cookieusername = $_COOKIE['username'];
-	$cookiepassword = $_COOKIE['password'];
-	$cookieuserid = $_COOKIE['userid'];
+	$username = securityInputCheck($_POST['username']);
+	$password = securityInputCheck(md5( $_POST['password'] ));
+	$cookieusername = securityInputCheck($_COOKIE['username']);
+	$cookiepassword = securityInputCheck($_COOKIE['password']);
+	$cookieuserid = securityInputCheck($_COOKIE['userid']);
 	
 	//если присутствуют логин и пароль, значит пытаемся логинить
 	//если их нет - значит проверяем куки и либо нахуй, либо позволяем работать
