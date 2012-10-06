@@ -7,7 +7,7 @@
 	
 	//Проверка, заведена ли у этого юзера категория, про которую он хочет посмотреть заметки.
 	//Если не заведена - нахуй на индексную страницу к своим категориям
-	$checkcategory_sql = "SELECT `notetype_id` FROM `notes_notetypes` WHERE `notetype_userid` = '".$_COOKIE['userid']."' AND `notetype_id` = '".$_GET['category']."' LIMIT 1";
+	$checkcategory_sql = "SELECT `notetype_id` FROM `notes_notetypes` WHERE `notetype_userid` = '".securityInputCheck($_COOKIE['userid'])."' AND `notetype_id` = '".securityInputCheck($_GET['category'])."' LIMIT 1";
 	$checkcategory_sql = mysql_query($checkcategory_sql);
 	if( mysql_num_rows ($checkcategory_sql) < 1 ) {
 		header("Location: /" );
@@ -44,7 +44,7 @@
 	
 	function createNewNote( object ) {
 		$.post("/editnote.php?action=createnew", {
-				noteType: <?=$_GET['category'];?>
+				noteType: <?=securityInputCheck($_GET['category']);?>
 			}, 
 			function(data) {
 				var newNoteID = data;
@@ -132,9 +132,6 @@
 		//initial happenings
 		initTinyMCE();
 		setDraggable();
-		$( '.likebutton' ).each( function() {
-			$( this ).button();
-		});
 	});
 </script>
 <div class="createnotebutton"><input type="button" class="likebutton" id="createnote" value="Новая заметка" /></div>

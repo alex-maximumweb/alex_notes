@@ -16,7 +16,10 @@
 	
 	switch( $_GET['action'] ) {
 		case "createcategory":
-			$sql = mysql_query("INSERT INTO `notes_notetypes` VALUES (NULL, '".securityInputCheck($_COOKIE['userid'])."', '".securityInputCheck($_POST['notetype_name'])."') LIMIT 1");
+			$sql = mysql_query("INSERT INTO `notes_notetypes` VALUES (NULL, '".securityInputCheck($_COOKIE['userid'])."', '".securityInputCheck($_POST['categoryName'])."')");
+			if(!$sql) {
+				echo mysql_error();
+			}
 		break;
 		case "createnew":
 			if( isset( $_POST['noteType'] ) ) {
