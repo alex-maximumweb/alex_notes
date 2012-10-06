@@ -45,7 +45,7 @@ tr.mceFirst, .ui-icon-gripsmall-diagonal-se { display: none ! important; }
 	display: none; position: absolute; width: 28px; height: 28px; top: -14px; right: -14px; cursor: pointer; background: url( '/i/global/close.png') top left; z-index: 9999;
 }
 
-.loginform {
+.loginform, .registerform {
 	background: #FFF;
 	width: 300px;
 	height: 150px;
@@ -57,11 +57,11 @@ tr.mceFirst, .ui-icon-gripsmall-diagonal-se { display: none ! important; }
 	padding: 30px;
 }
 
-.loginform div {
+.loginform div, .registerform div {
 	padding: 10px 0;
 }
 
-.loginform input[type="text"], input[type="password"] {
+.loginform input[type="text"], .loginform input[type="password"], .registerform input[type="text"], .registerform input[type="password"] {
 	padding: 5px 3px;
 	width: 290px;
 }

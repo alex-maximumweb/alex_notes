@@ -23,21 +23,22 @@
 		default:
 			$checkLogin = checkLogin();
 			if( !$checkLogin ) {
-				echo "
-					<div class=\"loginform\" >
-						<form method=\"POST\" action=\"?action=login\">
+				?>
+					<div class="loginform" >
+						<form method="POST" action="?action=login">
+							<span>Войти</span>
 							<div>
-								<input type=\"text\" name=\"username\" placeholder=\"Имя пользователя\" />
+								<input type="text" name="username" placeholder="Имя пользователя" />
 							</div>
 							<div>
-								<input type=\"password\" name=\"password\" placeholder=\"Пароль\" />
+								<input type="password" name="password" placeholder="Пароль" />
 							</div>
 							<div>
-								<input type=\"submit\" name=\"submit\" value=\"Войти\" />
+								<input type="submit" name="submit" value="Войти" />&nbsp;&nbsp;<a style="font-size: 12px;" href="/register.php">Зарегистрироваться</a>
 							</div>						
 						</form>
 					</div>
-				";
+				<?
 			} else {
 				header('Location: /');
 			}
