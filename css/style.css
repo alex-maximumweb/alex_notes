@@ -14,6 +14,8 @@ a { font-family: Arial; }
 	color: #999;
 }
 
+.likebutton { font-size: 80% ! important; }
+
 .note { 
 	border: 1px dashed gray; 
 	padding: 20px;

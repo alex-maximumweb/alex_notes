@@ -48,12 +48,12 @@
 			}, 
 			function(data) {
 				var newNoteID = data;
-				console.log(data);
 				if( newNoteID != "<?=$_STRING['query_error'];?>" ) {
 					var newNoteContents = "<div class='draggable ui-widget-content note' style='position: absolute; left:40px; top:120px'><textarea class='note' id='"+newNoteID+"'></textarea><div class='close'><i></i></div></div>";
 					$( newNoteContents ).appendTo( object );
 					initTinyMCE();
 					setDraggable();
+					saveNoteContents( $( '#'+newNoteID ) );
 				}
 			}
 		);
